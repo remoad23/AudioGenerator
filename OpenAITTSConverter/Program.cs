@@ -48,7 +48,31 @@ async Task<TTSRequest> SetupInput()
     Console.WriteLine("Please Enter API-Key");
     request.ApiKey = Console.ReadLine() ?? throw new ArgumentNullException(nameof(request.ApiKey));
 
-    request.LanguageOfText = Language.Ukrainian;    
+    Console.WriteLine("Please select a Language.");
+    Console.WriteLine($"""
+                      English = {Language.English}
+                      Ukrainian = {Language.Ukrainian}
+                      Spanish = {Language.Spanish}
+                      French = {Language.French}
+                      German = {Language.German}
+                      Italian = {Language.Italian}
+                      Portuguese = {Language.Portuguese}
+                      Dutch = {Language.Dutch}
+                      Russian = {Language.Russian}
+                      Japanese = {Language.Japanese}
+                      Korean = {Language.Korean}
+                      Chinese = = {Language.Chinese}
+                      """);
+
+    var maxValueOfEnum = Enum.GetValues(typeof(Language)).Cast<Language>().Max();
+    var language = Console.ReadLine();
+    
+    if (!int.TryParse(language, out int languageInt) || languageInt >  (int)maxValueOfEnum)
+    {
+        throw new ArgumentException("Invalid Language");
+    }
+    
+    request.LanguageOfText = (Language)languageInt;    
     
     Console.WriteLine("Please give the entire Filepath to the file \n example: sometext/folder/file.txt");
     var path = Console.ReadLine() ?? throw new ArgumentNullException("invalid entry");
