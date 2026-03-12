@@ -20,7 +20,8 @@ foreach (var text in request.TextsToConvertToAudio)
     await RequestAndSaveAudioFile(body, text);
 }
 
-Console.WriteLine("Audios saved in C:/Audiostranslated");
+var audioPath = Path.Combine(Environment.SystemDirectory, "audiostranslated");
+Console.WriteLine($"Audios saved in {audioPath}");
 
 async Task RequestAndSaveAudioFile(object body,string filenameOutput)
 {
@@ -36,7 +37,7 @@ async Task RequestAndSaveAudioFile(object body,string filenameOutput)
     );
     
     var bytes = await response.Content.ReadAsByteArrayAsync();
-    var pathToSave = Path.Combine(Environment.SystemDirectory,"audiostranslated",$"{filenameOutput}.mp3") ;
+    var pathToSave = Path.Combine(Environment.SystemDirectory,"audiostranslated",$"{filenameOutput}.mp3");
     await File.WriteAllBytesAsync(pathToSave, bytes);
 }
 
