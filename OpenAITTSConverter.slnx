@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="AnkiEditTools/AnkiEditTools.csproj" />
   <Project Path="OpenAITTSConverter/OpenAITTSConverter.csproj" />
   <Project Path="Stringsplitter/Stringsplitter.csproj" />
 </Solution>
